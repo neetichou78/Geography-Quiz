@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Geography Quiz</title>
+<style>
+  body {
+    font-family: Arial, sans-serif;
+    text-align: center;
+    background-color: #f0f0f0; /* Background color for all pages */
+  }
+
+  h1 {
+    color: #333;
+    margin-top: 50px;
+  }
+
+  .button {
+    background-color: #4CAF50; /* Green */
+    border: none;
+    color: white;
+    padding: 15px 32px;
+    text-align: center;
+    font-size: 16px;
+    margin: 20px;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+  }
+
+  .button:hover {
+    background-color: #45a049;
+  }
+
+  .options {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .option {
+    margin: 10px;
+    padding: 10px 20px;
+    border: 2px solid transparent;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: border-color 0.3s ease, background-color 0.3s ease, color 0.3s ease;
+  }
+
+  .option:hover {
+    border-color: black;
+    background-color: #ddd;
+  }
+
+  .selected {
+    border-color: black;
+  }
+
+  .question-container {
+    display: none;
+  }
+
+  .question-container.active {
+    display: block;
+  }
+</style>
+</head>
+<body>
+
+<div id="main-page">
+  <h1>Geography Quiz</h1>
+  <button class="button" onclick="startQuiz()">Play</button>
+</div>
+
+<div id="questions" class="question-container">
+  <div id="question1" class="question">
+    <h2>Question 1:</h2>
+    <p>What is the capital of France?</p>
+    <div class="options">
+      <div class="option" onclick="checkAnswer('Paris')">Paris</div>
+      <div class="option" onclick="checkAnswer('Rome')">Rome</div>
+      <div class="option" onclick="checkAnswer('Madrid')">Madrid</div>
+      <div class="option" onclick="checkAnswer('Berlin')">Berlin</div>
+    </div>
+  </div>
+
+  <div id="question2" class="question">
+    <h2>Question 2:</h2>
+    <p>Which country is known as the Land of the Rising Sun?</p>
+    <div class="options">
+      <div class="option" onclick="checkAnswer('Japan')">Japan</div>
+      <div class="option" onclick="checkAnswer('China')">China</div>
+      <div class="option" onclick="checkAnswer('India')">India</div>
+      <div class="option" onclick="checkAnswer('Thailand')">Thailand</div>
+    </div>
+  </div>
+
+  <div id="question3" class="question">
+    <h2>Question 3:</h2>
+    <p>What is the largest ocean in the world?</p>
+    <div class="options">
+      <div class="option" onclick="checkAnswer('Pacific Ocean')">Pacific Ocean</div>
+      <div class="option" onclick="checkAnswer('Atlantic Ocean')">Atlantic Ocean</div>
+      <div class="option" onclick="checkAnswer('Indian Ocean')">Indian Ocean</div>
+      <div class="option" onclick="checkAnswer('Arctic Ocean')">Arctic Ocean</div>
+    </div>
+  </div>
+
+  <div id="question4" class="question">
+    <h2>Question 4:</h2>
+    <p>Which continent is the largest by land area?</p>
+    <div class="options">
+      <div class="option" onclick="checkAnswer('Asia')">Asia</div>
+      <div class="option" onclick="checkAnswer('Africa')">Africa</div>
+      <div class="option" onclick="checkAnswer('North America')">North America</div>
+      <div class="option" onclick="checkAnswer('Antarctica')">Antarctica</div>
+    </div>
+  </div>
+
+  <div id="question5" class="question">
+    <h2>Question 5:</h2>
+    <p>What is the longest river in the world?</p>
+    <div class="options">
+      <div class="option" onclick="checkAnswer('Nile')">Nile</div>
+      <div class="option" onclick="checkAnswer('Amazon')">Amazon</div>
+      <div class="option" onclick="checkAnswer('Yangtze')">Yangtze</div>
+      <div class="option" onclick="checkAnswer('Mississippi')">Mississippi</div>
+    </div>
+  </div>
+</div>
+
+<div id="result" class="question-container" style="display: none;">
+  <h2>Your Score:</h2>
+  <p id="score"></p>
+</div>
+
+<script>
+  var currentQuestion = 1;
+  var score = 0;
+
+  function startQuiz() {
+    document.getElementById('main-page').style.display = 'none';
+    document.getElementById('questions').classList.add('active');
+  }
+
+  function checkAnswer(selectedOption) {
+    var correctAnswers = ["Paris", "Japan", "Pacific Ocean", "Asia", "Nile"];
+    if (selectedOption === correctAnswers[currentQuestion - 1]) {
+      score++;
+    }
+    if (currentQuestion < 5) {
+      document.getElementById('question' + currentQuestion).style.display = 'none';
+      currentQuestion++;
+      document.getElementById('question' + currentQuestion).style.display = 'block';
+    } else {
+      showScore();
+    }
+  }
+
+  function showScore() {
+    document.getElementById('questions').style.display = 'none';
+    document.getElementById('result').style.display = 'block';
+    document.getElementById('score').innerHTML = score + '/5';
+  }
+</script>
+
+</body>
+</html>
